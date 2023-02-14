@@ -75,3 +75,12 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
+        
+    - name: Tar files
+      run: tar -cvf my_files.tar /home/runner/work/_temp/codeql_databases   
+    #第二步，将生成的结果文件，推到Github中    
+    - name: upload result
+      uses: actions/upload-artifact@v3
+      with: 
+        name: result
+        path: my_files.tar
